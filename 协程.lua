@@ -13,5 +13,31 @@
                 - 正常
                 - 死亡
         - status 可以查看协程状态
+        - resume 重启, 
+            - 参数1 co创建的协程
+            - 参数2/3  函数需要的参数
+            - 返回1 true和false
+            - 返回2 函数return值
+        - wrap 创建协同函数,返回的co可以直接调用函数
+        - yield 暂停
 
 ]]
+
+-- 定义协同函数
+
+co = coroutine.create( function (a, b) print(a + b);return 1 end )
+
+print(type(co))
+print(coroutine.status( co ))
+
+print(coroutine.resume( co, 20, 30 ))
+print(coroutine.status( co ))
+
+co = coroutine.wrap( function (a, b) print(a - b);print(a+b);return a*b end )
+print(co(20, 3))
+print("i am here ")
+
+
+
+
+
